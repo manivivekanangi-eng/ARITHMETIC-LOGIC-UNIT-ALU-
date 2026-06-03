@@ -1,0 +1,69 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity alu_tb is
+end alu_tb;
+
+architecture Behavioral of alu_tb is
+
+component alu
+    Port (
+        A   : in  STD_LOGIC_VECTOR(3 downto 0);
+        B   : in  STD_LOGIC_VECTOR(3 downto 0);
+        sel : in  STD_LOGIC_VECTOR(2 downto 0);
+        Y   : out STD_LOGIC_VECTOR(3 downto 0)
+    );
+end component;
+
+signal A   : STD_LOGIC_VECTOR(3 downto 0);
+signal B   : STD_LOGIC_VECTOR(3 downto 0);
+signal sel : STD_LOGIC_VECTOR(2 downto 0);
+signal Y   : STD_LOGIC_VECTOR(3 downto 0);
+
+begin
+
+uut: alu
+port map(
+    A => A,
+    B => B,
+    sel => sel,
+    Y => Y
+);
+
+process
+begin
+
+    -- Addition
+    A <= "0101";
+    B <= "0011";
+    sel <= "000";
+    wait for 10 ns;
+
+    -- Subtraction
+    A <= "1000";
+    B <= "0010";
+    sel <= "001";
+    wait for 10 ns;
+
+    -- AND
+    A <= "1100";
+    B <= "1010";
+    sel <= "010";
+    wait for 10 ns;
+
+    -- OR
+    A <= "1100";
+    B <= "1010";
+    sel <= "011";
+    wait for 10 ns;
+
+    -- NOT
+    A <= "1100";
+    sel <= "100";
+    wait for 10 ns;
+
+    wait;
+
+end process;
+
+end Behavioral;
